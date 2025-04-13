@@ -1,25 +1,15 @@
-FROM osrf/ros:noetic-desktop-full
+ARG BASE=provsim
+FROM ${BASE} AS provdebug
 
 RUN apt-get update \
     && apt-get dist-upgrade -y \
     && apt-get install --yes \
         git \
         wget \
+        gpg \
         curl \
         ca-certificates \
-        gpg \
-        cmake \
         build-essential \
-        qtcreator \
-        qt5-default \
-        qtchooser \
-        libqt5serialport5-dev \
-        mesa-utils \
-        python3-pip \
-        xterm \
-        qtchooser \
-        libmsgsl-dev \
-        libpolyclipping-dev \
         software-properties-common 
 
 RUN add-apt-repository ppa:deadsnakes/ppa
@@ -35,36 +25,9 @@ RUN python3.12 -m pipx ensurepath --global
 RUN python3.12 -m pip install virtualenv
 # RUN pip install conan==1.66.0
 
-ADD https://github.com/conan-io/conan/releases/download/1.66.0/conan-ubuntu-64.deb /tmp/
-RUN dpkg -i /tmp/conan-ubuntu-64.deb 
-
-RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg > /dev/null
-RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list > /dev/null
-
-
-####### README installation ############
-RUN ! [ -f  /etc/ros/rosdep/sources.list.d/20-default.list ] && rosdep init 2> /dev/null || echo "rosdep already initialized"
-RUN rosdep update
-
-# QT5 installation is executed via ubuntu repositories (above)
-# ADD https://d13lb3tujbc8s0.cloudfront.net/onlineinstallers/qt-online-installer-linux-x64-4.9.0.run /tmp
-# RUN chmod +x /tmp/qt-unified-linux* \
-    # && /tmp/qt-unified-linux*
-
-######### workspace configuration ###########
-RUN mkdir -p /root/catkin_ws/src
-WORKDIR /root/catkin_ws/
-# RUN catkin_make let's do it iterativelly!
-# RUN echo "source /root/catkin_ws/devel/setup.bash" >> /root/.bashrc
-
-########### bash config ###########
-RUN echo ". /opt/ros/noetic/setup.bash" >> /root/.bashrc
-RUN echo "[ -f /root/catkin_ws/devel/setup.bash ] && . /root/catkin_ws/devel/setup.bash" >> /root/.bashrc
-# gpg cmake are already installed
-
 
 ############## DEBUG TOOLS ##############
-# install tmux
+## install tmux
 RUN apt-get install --yes byacc bison
 ENV TMUX_VERSION=3.5a
 ADD https://github.com/tmux/tmux/releases/download/3.5a/tmux-${TMUX_VERSION}.tar.gz /tmp/
@@ -74,7 +37,7 @@ RUN tar -xzf /tmp/tmux-${TMUX_VERSION}.tar.gz -C /tmp \
     && make \
     && make install
 
-# install neovim configuration
+## bash configurations
 WORKDIR /root
 ADD https://raw.githubusercontent.com/mrzool/bash-sensible/refs/heads/master/sensible.bash /root/
 
@@ -97,7 +60,6 @@ RUN ln -s /root/config/lscolors.sh \
     && ln -s /root/config/.vim \
     && ln -s /root/config/.tmux.conf \
     && ln -s /root/config/.vimrc
-    # && ln -s /root/config/.luapaths \
 
 #### NODE installation #####
 ENV NODE_VERSION=22
@@ -110,5 +72,11 @@ RUN . "$NVM_DIR/nvm.sh" && nvm use current
 RUN echo "export NVM_DIR=\"$NVM_DIR\"" >> /root/.bashrc
 RUN echo "[ -f \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"" >> /root/.bashrc
 
-WORKDIR /root/catkin_ws
+## rust and  ago packages
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN /root/.cargo/bin/cargo install ripgrep
+RUN /root/.cargo/bin/cargo install fd-find
 
+RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+
+WORKDIR /root/catkin_ws

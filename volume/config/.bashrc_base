@@ -91,7 +91,7 @@ fi
      fi
  fi
 
- . $HOME/.gitprompt.sh
+#  . $HOME/.gitprompt.sh
 
  [ -f "$HOME/.qfc/bin/qfc.sh" ] && source "$HOME/.qfc/bin/qfc.sh"
  command -v zoxide > /dev/null && eval "$(zoxide init bash)"
