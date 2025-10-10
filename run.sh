@@ -7,25 +7,53 @@ fi
 
 echo "PRJ_DIR: $PRJ_DIR"
 
-if [ -z "$1" ]; then
-    image="provsim"
-else
-    image=$1
+if [ "$1" = '-h' ]; then
+    echo 'usage: $0 [-g] [image_name]'
+    echo '-g: include gpus passthrough for graphics and Gazebo simulation'
+    echo 'image_name: default is provant'
+    echo ''
+    echo 'launches a container of image_name|provant with graphical integration with the host system'
+    echo 'shares $PWD/shared/catkin_ws with the container for persistence'
+    exit 0
 fi
 
+if [ "$1" = '-g' ]; then
+    gpus="--gpus all"
+    shift
+else
+    gpus=""
+fi
+if [ -z "$1" ]; then
+    image=provant
+else
+    image=$1
+    shift
+fi
+
+
+opts="$*"
+
+
+
+    # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
 xhost +local:root
-docker run --net=host \
-    --env="DISPLAY" \
+docker run --net=host $gpus $opts \
+    --env="SDL_VIDEODRIVER=x11" \
+    --env="LIBGL_ALWAYS_INDIRECT=0" \
+    -v /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d \
+    -v /usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d \
+    --env="XAUTHORITY=/root/.Xauthority" \
+    --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
+    --env="NVIDIA_VISIBLE_DEVICES=all" \
+    --env="NVIDIA_DRIVER_CAPABILITIES=all" \
     --device="/dev/dri" \
+    --device="/dev/kfd" \
+    --volume="/dev/dri:/dev/dri:rw" \
     --group-add 44 \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --volume="$(pwd)/volume/src:/root/catkin_ws/src" \
-    --volume="$(pwd)/volume/config:/root/config" \
     --volume="$HOME/.gazebo:/root/.gazebo" \
-    -it $image bash
+    --volume="$XAUTHORITY:/root/.Xauthority" \
+    --volume="$PWD/shared/catkin_ws:/root/catkin_ws" \
+    -it --privileged $image bash
 
-    # --volume="/usr/lib/x86_64-linux-gnu/dri:/usr/lib/x86_64-linux-gnu/dri" \
-    # --volume="/usr/share/glvnd:/usr/share/glvnd" \
-    # --volume="/usr/lib/x86_64-linux-gnu/libGL.so.1:/usr/lib/x86_64-linux-gnu/libGL.so.1" \
-    # --volume="/usr/lib/x86_64-linux-gnu/libEGL.so.1:/usr/lib/x86_64-linux-gnu/libEGL.so.1" \
