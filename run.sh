@@ -42,7 +42,7 @@ docker run --net=host $gpus $opts \
     --env="LIBGL_ALWAYS_INDIRECT=0" \
     -v /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d \
     -v /usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d \
-    --env="XAUTHORITY=/root/.Xauthority" \
+    --env="XAUTHORITY=/home/ubuntu/.Xauthority" \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
     --env="NVIDIA_VISIBLE_DEVICES=all" \
@@ -52,8 +52,8 @@ docker run --net=host $gpus $opts \
     --volume="/dev/dri:/dev/dri:rw" \
     --group-add 44 \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --volume="$HOME/.gazebo:/root/.gazebo" \
-    --volume="$XAUTHORITY:/root/.Xauthority" \
-    --volume="$PWD/shared/catkin_ws:/root/catkin_ws" \
+    --volume="$HOME/.gazebo:/home/ubuntu/.gazebo" \
+    --volume="$XAUTHORITY:/home/ubuntu/.Xauthority" \
+    --volume="$PWD/shared/catkin_ws:/home/ubuntu/catkin_ws" \
     -it --privileged $image bash
 

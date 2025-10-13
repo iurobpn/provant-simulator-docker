@@ -24,7 +24,7 @@ Lastly, to stop all containers and remove them:
 ```
 
 ## Persistence
-The run.sh script mounts volumes to allow graphical integration with the host system, also mounts `./shared/catkin_ws` onto `/root/catkin_ws` in the container. This allows you to persist your workspace and any files you create or modify inside the workspace while running the container.
+The run.sh script mounts volumes to allow graphical integration with the host system, also mounts `./shared/catkin_ws` onto `/home/ubuntu/catkin_ws` in the container. This allows you to persist your workspace and any files you create or modify inside the workspace while running the container.
 
 On your host system, run:
 ```bash
@@ -38,6 +38,4 @@ The image install dependencies for the ProVANT Simulator, but does not include t
 git clone https://github.com/ProVANT-Project/ProVANT_Simulator.git ./shared/catkin_ws/src/ProVANT_Simulator
 ```
 Then, follow the install procedure in the README.md of the ProVANT Simulator repository to build and run the simulator.
-
-For now, the image runs as root, which is not ideal. Future versions may include a non-root user for better security.
 
