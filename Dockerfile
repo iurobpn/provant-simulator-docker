@@ -11,7 +11,7 @@ RUN apt install --yes build-essential qtcreator qt5-default qtchooser \
 		libqt5serialport5-dev mesa-utils python3-pip xterm qtchooser \
 		libmsgsl-dev libpolyclipping-dev fzf software-properties-common
 
-RUN pip3 install --upgrade conan
+RUN pip3 install --upgrade conan==1.63.0
 
 # Compile Ipopt
 # Install dependencies
