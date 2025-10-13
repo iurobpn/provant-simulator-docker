@@ -39,6 +39,7 @@ RUN echo 'export TILT_STRATEGIES=$HOME/catkin_ws/devel/lib/' >> /home/ubuntu/.ba
 RUN echo 'export TILT_MATLAB=$HOME/catkin_ws/src/ProVANT_Simulator/source/Structure/Matlab/' >> /home/ubuntu/.bashrc
 RUN echo 'export PROVANT_DATABASE=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/' >> /home/ubuntu/.bashrc
 RUN echo 'export GAZEBO_MODEL_PATH=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/models/' >> /home/ubuntu/.bashrc
+RUN echo 'export CONTROL_STRATEGIES_SOURCE=$HOME/catkin_ws/src/ProVANT_Simulator/source/Structure/control_strategies' >> /home/ubuntu/.bashrc
 
 WORKDIR /home/ubuntu/catkin_ws
 
