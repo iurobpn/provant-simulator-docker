@@ -55,25 +55,18 @@ RUN /tmp/install-casadi.sh
 RUN useradd -m ubuntu
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-ubuntu
 USER ubuntu
-RUN mkdir -p /home/ubuntu/catkin_ws/src/roVANT-Simulator_Developer
+RUN mkdir -p /home/ubuntu/catkin_ws/src/
 RUN echo "source /opt/ros/noetic/setup.bash" >> /home/ubuntu/.bashrc
 RUN echo "source /home/ubuntu/catkin_ws/devel/setup.bash" >> /home/ubuntu/.bashrc
 RUN sudo chmod 440 /etc/sudoers
 
-# RUN --mount=type=bind,source=./shared/catkin_ws,target=/home/ubuntu/catkin_ws \
-#     cd /home/ubuntu/catkin_ws/src/ProVANT_Simulator_Developer/ \
-#     && ./install.sh
-RUN sudo ln -s /home/ubuntu/catkin_ws/src/ProVANT_Simulator/source/build/GUI /usr/local/bin/provant_gui
-
-# ProVANT Simulator Environment Variables
-RUN echo 'export TILT_PROJECT=$HOME/catkin_ws/src/ProVANT_Simulator/' >> /home/ubuntu/.bashrc
-RUN echo 'export PROVANT_ROS=$HOME/catkin_ws/src/' >> /home/ubuntu/.bashrc
-RUN echo 'export DIR_ROS=$HOME/catkin_ws/' >> /home/ubuntu/.bashrc
-RUN echo 'export TILT_STRATEGIES=$HOME/catkin_ws/devel/lib/' >> /home/ubuntu/.bashrc
-RUN echo 'export TILT_MATLAB=$HOME/catkin_ws/src/ProVANT_Simulator/source/Structure/Matlab/' >> /home/ubuntu/.bashrc
-RUN echo 'export PROVANT_DATABASE=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/' >> /home/ubuntu/.bashrc
-RUN echo 'export GAZEBO_MODEL_PATH=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/models/' >> /home/ubuntu/.bashrc
-RUN echo 'export CONTROL_STRATEGIES_SOURCE=$HOME/catkin_ws/src/ProVANT_Simulator/source/Structure/control_strategies' >> /home/ubuntu/.bashrc
+RUN --mount=type=bind,source=./shared/catkin_ws,target=/home/ubuntu/catkin_ws,rw \
+    [ -d "/home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/" ] \
+    && cd /home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/ \
+    && sudo bash -c "awk '!/conan/ { print }' install.sh > install_no_conan.sh" \
+    && sudo chmod +x install_no_conan.sh \
+    && sudo bash -c 'source /opt/ros/noetic/setup.bash && ./install_no_conan.sh' \
+    || echo 'Installed ProVANT dependencies'
 
 WORKDIR /home/ubuntu/catkin_ws
 
