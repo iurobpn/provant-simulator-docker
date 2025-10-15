@@ -37,7 +37,7 @@ opts="$*"
 
     # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
 xhost +local:root
-docker run --net=host $gpus $opts \
+docker run $gpus $opts \
     --env="SDL_VIDEODRIVER=x11" \
     --env="LIBGL_ALWAYS_INDIRECT=0" \
     -v /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d \
