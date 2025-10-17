@@ -32,28 +32,31 @@ fi
 
 
 opts="$*"
-
+if [ -z "$XAUTHORITY" ]; then
+    xauth=""
+else
+    xauth='--env="XAUTHORITY=/home/ubuntu/.Xauthority"'
+fi
 
 
     # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
 xhost +local:root
-docker run $gpus $opts \
+docker run $gpus $xauth $opts \
     --env="SDL_VIDEODRIVER=x11" \
     --env="LIBGL_ALWAYS_INDIRECT=0" \
-    -v /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d \
-    -v /usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d \
-    --env="XAUTHORITY=/home/ubuntu/.Xauthority" \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
     --env="NVIDIA_VISIBLE_DEVICES=all" \
     --env="NVIDIA_DRIVER_CAPABILITIES=all" \
     --device="/dev/dri" \
     --device="/dev/kfd" \
-    --volume="/dev/dri:/dev/dri:rw" \
     --group-add 44 \
+    --volume="/dev/dri:/dev/dri:rw" \
+    --volume="/usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d" \
+    --volume="/usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume="$HOME/.gazebo:/home/ubuntu/.gazebo" \
-    --volume="$XAUTHORITY:/home/ubuntu/.Xauthority" \
-    --volume="$PWD/shared/catkin_ws:/home/ubuntu/catkin_ws" \
+    --volume="$PWD/shared/:/home/ubuntu/shared:rw" \
+    --volume="$PWD/shared/catkin_ws:/home/ubuntu/catkin_ws:rw" \
     -it --privileged $image bash
 

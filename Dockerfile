@@ -32,16 +32,6 @@ RUN apt-get update \
     file --install-recommends --yes \
     && rm -rf /var/lib/apt/lists/*
 
-# compile and install HSL libraries
-# COPY ./coinhsl-2024.05.15.tar.gz /root/ipopt
-# COPY ./install-hsl.sh /root/ipopt
-# RUN /root/ipopt/install-hsl.sh
-#
-# COPY ./install-mumps.sh /root/ipopt
-# RUN /root/ipopt/install-mumps.sh
-#
-# COPY ./install-ipopt.sh /root/ipopt
-# RUN /root/ipopt/install-ipopt.sh
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt-get update && apt-get install --yes gcc-13 g++-13 \
     && rm -rf /var/lib/apt/lists/*
@@ -57,7 +47,7 @@ RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-ubuntu
 USER ubuntu
 RUN mkdir -p /home/ubuntu/catkin_ws/src/
 RUN echo "source /opt/ros/noetic/setup.bash" >> /home/ubuntu/.bashrc
-RUN echo "source /home/ubuntu/catkin_ws/devel/setup.bash" >> /home/ubuntu/.bashrc
+RUN echo '[ -f "/home/ubuntu/catkin_ws/devel/setup.bash" ] && source /home/ubuntu/catkin_ws/devel/setup.bash' >> /home/ubuntu/.bashrc
 RUN sudo chmod 440 /etc/sudoers
 
 RUN --mount=type=bind,source=./shared/catkin_ws,target=/home/ubuntu/catkin_ws,rw \
