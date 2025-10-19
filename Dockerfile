@@ -50,6 +50,7 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> /home/ubuntu/.bashrc
 RUN echo '[ -f "/home/ubuntu/catkin_ws/devel/setup.bash" ] && source /home/ubuntu/catkin_ws/devel/setup.bash' >> /home/ubuntu/.bashrc
 RUN sudo chmod 440 /etc/sudoers
 
+WORKDIR /home/ubuntu
 RUN --mount=type=bind,source=./shared/catkin_ws,target=/home/ubuntu/catkin_ws,rw \
     [ -d "/home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/" ] \
     && cd /home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/ \
@@ -57,6 +58,10 @@ RUN --mount=type=bind,source=./shared/catkin_ws,target=/home/ubuntu/catkin_ws,rw
     && sudo chmod +x install_no_conan.sh \
     && sudo bash -c 'source /opt/ros/noetic/setup.bash && ./install_no_conan.sh' \
     || echo 'Installed ProVANT dependencies'
+
+RUN ln -s /mnt/shared/.bash_history /home/ubuntu/.bash_history \
+    && ln -s /mnt/shared/.bash_config /home/ubuntu/.bash_config \
+    && ln -s /mnt/shared /home/ubuntu/shared
 
 WORKDIR /home/ubuntu/catkin_ws
 

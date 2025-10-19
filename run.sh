@@ -38,7 +38,6 @@ else
     xauth='--env="XAUTHORITY=/home/ubuntu/.Xauthority"'
 fi
 
-
     # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
 xhost +local:root
 docker run $gpus $xauth $opts \
@@ -56,7 +55,7 @@ docker run $gpus $xauth $opts \
     --volume="/usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume="$HOME/.gazebo:/home/ubuntu/.gazebo" \
-    --volume="$PWD/shared/:/home/ubuntu/shared:rw" \
+    --volume="$PWD/shared/:/mnt/shared/:rw" \
     --volume="$PWD/shared/catkin_ws:/home/ubuntu/catkin_ws:rw" \
     -it --privileged $image bash
 
