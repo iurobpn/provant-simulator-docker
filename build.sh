@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 if [ "$1" = '-h' ]; then
     echo 'usage: $0 [image_name]'
     echo 'image_name: default is provant'
