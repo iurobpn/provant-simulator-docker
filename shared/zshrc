@@ -1,0 +1,8 @@
+export TILT_STRATEGIES=/home/ubuntu/catkin_ws/devel/lib
+export TILT_MATLAB=/home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/source/Structure/Matlab/
+export TILT_PROJECT=/home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer
+export PROVANT_ROS=/home/ubuntu/catkin_ws/src
+export PROVANT_DATABASE=/home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/source/Database
+export GAZEBO_MODEL_PATH=/home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/models
+export DIR_ROS=/home/ubuntu/catkin_ws
+export CONTROL_STRATEGIES_SOURCE=/home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/source/Structure/control_strategies
