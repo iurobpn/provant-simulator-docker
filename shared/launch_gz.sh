@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+set -e
+
+mkdir -p /mnt/shared/sim_quad/cpp/build
+cd /mnt/shared/sim_quad/cpp/build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make -j4
+sudo make install
+
+cd ~/catkin_ws
+catkin_make
+
+source /opt/ros/noetic/setup.zsh
+source ~/catkin_ws/devel/setup.zsh
+
+roslaunch Database gazebo.launch world:=/home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/worlds/worlds/iuro/quad.world control_strategy:=/home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/models/quadcopter/config/config.xml
