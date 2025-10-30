@@ -3,3 +3,5 @@ sessions/
 *.swp
 *netrw*
 shared/catkin_ws
+shared/nvim
+shared/sim_quad
