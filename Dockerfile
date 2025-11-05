@@ -8,7 +8,7 @@ RUN apt update && apt dist-upgrade -y \
         && rm -rf /var/lib/apt/lists/*
 
 
-RUN pip3 install --upgrade conan==1.63.0
+RUN pip3 install --upgrade conan
 
 ADD https://cmake.org/files/v3.23/cmake-3.23.5.tar.gz /tmp/
 WORKDIR /tmp
