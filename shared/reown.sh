@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo chown -R $USER:$USER shared/
+sudo chown -R ubuntu:ubuntu /mnt/shared/

@@ -38,18 +38,18 @@ else
     xauth='--env="XAUTHORITY=/home/ubuntu/.Xauthority"'
 fi
 
+[ -e /dev/kfd ] && devs="--device=\"/dev/kfd\"" \
     # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
 xhost +local:root
-docker run $gpus $xauth $opts \
+podman run $gpus $xauth $opts \
     --env="SDL_VIDEODRIVER=x11" \
     --env="LIBGL_ALWAYS_INDIRECT=0" \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
     --env="NVIDIA_VISIBLE_DEVICES=all" \
     --env="NVIDIA_DRIVER_CAPABILITIES=all" \
-    --device="/dev/dri" \
-    --device="/dev/kfd" \
-    --group-add 44 \
+    --device="/dev/dri" $devs \
+    --group-add video \
     --volume="/dev/dri:/dev/dri:rw" \
     --volume="/usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d" \
     --volume="/usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d" \

@@ -21,4 +21,4 @@ if ! [ -d ./shared/catkin_ws/src/ProVANT-Simulator_Developer ] && ! git clone gi
     echo "run ./install.sh after container is running"
 fi
 cd -
-docker build -t $image .
+podman build -t $image .
