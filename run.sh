@@ -38,7 +38,7 @@ else
     xauth='--env="XAUTHORITY=/home/ubuntu/.Xauthority"'
 fi
 
-[ -e /dev/kfd ] && devs="--device=\"/dev/kfd\"" \
+[ -e /dev/kfd ] && devs="--device=\"/dev/kfd\""
     # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
 xhost +local:root
 podman run $gpus $xauth $opts \
