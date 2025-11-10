@@ -55,7 +55,7 @@ RUN /tmp/install-casadi.sh
 RUN useradd -m ubuntu
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-ubuntu
 USER ubuntu
-RUN mkdir -p /home/ubuntu/catkin_ws/src/roVANT-Simulator_Developer
+RUN mkdir -p /home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer
 RUN echo "source /opt/ros/noetic/setup.bash" >> /home/ubuntu/.bashrc
 RUN echo "source /home/ubuntu/catkin_ws/devel/setup.bash" >> /home/ubuntu/.bashrc
 RUN sudo chmod 440 /etc/sudoers
@@ -75,5 +75,12 @@ RUN echo 'export PROVANT_DATABASE=$HOME/catkin_ws/src/ProVANT_Simulator/source/D
 RUN echo 'export GAZEBO_MODEL_PATH=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/models/' >> /home/ubuntu/.bashrc
 RUN echo 'export CONTROL_STRATEGIES_SOURCE=$HOME/catkin_ws/src/ProVANT_Simulator/source/Structure/control_strategies' >> /home/ubuntu/.bashrc
 
+USER root
+WORKDIR /tmp
+COPY ./install-boost.sh /tmp
+RUN /tmp/install-boost.sh \
+    && rm -rf /tmp/install-boost.sh
+
+USER ubuntu
 WORKDIR /home/ubuntu/catkin_ws
 

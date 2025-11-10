@@ -48,12 +48,12 @@ docker run $gpus $opts \
     --env="NVIDIA_VISIBLE_DEVICES=all" \
     --env="NVIDIA_DRIVER_CAPABILITIES=all" \
     --device="/dev/dri" \
-    --device="/dev/kfd" \
     --volume="/dev/dri:/dev/dri:rw" \
     --group-add 44 \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume="$HOME/.gazebo:/home/ubuntu/.gazebo" \
     --volume="$XAUTHORITY:/home/ubuntu/.Xauthority" \
     --volume="$PWD/shared/catkin_ws:/home/ubuntu/catkin_ws" \
+    --volume="$PWD/shared:/mnt/shared" \
     -it --privileged $image bash
 
