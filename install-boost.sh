@@ -27,3 +27,5 @@ echo 'export CPLUS_INCLUDE_PATH=/usr/local/include:$CPLUS_INCLUDE_PATH'  >> /hom
 
 cd /tmp
 rm -rf boost_*
+
+sudo ldconfig

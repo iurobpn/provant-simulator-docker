@@ -3,10 +3,10 @@
 set -e
 
 mkdir -p /mnt/shared/sim_quad/cpp/build
-cd /mnt/shared/sim_quad/cpp/build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-make -j4
-sudo make install
+cd /mnt/shared/sim_quad/cpp/build/Debug
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+ninja -j4
+sudo ninja install
 
 cd ~/catkin_ws
 catkin_make
