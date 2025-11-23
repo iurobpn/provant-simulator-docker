@@ -2,9 +2,8 @@
 
 set -e
 
-mkdir -p /mnt/shared/sim_quad/cpp/build
 cd /mnt/shared/sim_quad/cpp/build/Debug
-cmake -DCMAKE_BUILD_TYPE=Debug ..
+cmake -DCMAKE_BUILD_TYPE=Debug ../..
 ninja -j4
 sudo ninja install
 
