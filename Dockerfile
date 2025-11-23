@@ -60,11 +60,15 @@ RUN --mount=type=bind,source=./shared/catkin_ws,target=/home/ubuntu/catkin_ws,rw
     && cd /home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/ \
     && sudo bash -c "awk '!/conan/ { print }' install.sh > install_no_conan.sh" \
     && sudo chmod +x install_no_conan.sh \
-    && sudo bash -c 'source /opt/ros/noetic/setup.bash && ./install_no_conan.sh'
+    && sudo bash -c 'source /opt/ros/noetic/setup.bash && ./install_no_conan.sh' \
+    && sudo rm -f /usr/local/bin/provant_gui \
+    && sudo cp /home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer/source/build/GUI /usr/local/bin/provant_gui
 
 RUN ln -s /mnt/shared/.bash_history /home/ubuntu/.bash_history \
     && ln -s /mnt/shared/.bash_config /home/ubuntu/.bash_config \
     && ln -s /mnt/shared /home/ubuntu/shared
+
+
 
 WORKDIR /home/ubuntu/catkin_ws
 
