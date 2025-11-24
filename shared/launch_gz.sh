@@ -6,6 +6,7 @@ cd /mnt/shared/sim_quad/cpp/build/Debug
 cmake -DCMAKE_BUILD_TYPE=Debug ../..
 ninja -j4
 sudo ninja install
+sudo ldconfig
 
 cd /mnt/shared/catkin_ws
 catkin_make
