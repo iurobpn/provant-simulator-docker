@@ -9,5 +9,5 @@ make -j$(nproc)
 make install
 
 cd ..
-rm -rf cmake-3.23.5
+rm -rf cmake-3.23.5 cmake-3.23.5.tar.gz
 

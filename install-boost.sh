@@ -21,9 +21,6 @@ cd boost_$VERSION
 ./b2
 sudo ./b2 install --prefix=/usr/local
 
-echo 'export BOOST_ROOT=/usr/local' >> /home/ubuntu/.bashrc
-echo 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH'  >> /home/ubuntu/.bashrc
-echo 'export CPLUS_INCLUDE_PATH=/usr/local/include:$CPLUS_INCLUDE_PATH'  >> /home/ubuntu/.bashrc
 
 cd /tmp
 rm -rf boost_*

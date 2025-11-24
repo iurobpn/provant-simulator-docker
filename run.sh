@@ -56,6 +56,5 @@ podman run $gpus $xauth $opts \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume="$HOME/.gazebo:/home/ubuntu/.gazebo" \
     --volume="$PWD/shared/:/mnt/shared/:rw" \
-    --volume="$PWD/shared/catkin_ws:/home/ubuntu/catkin_ws:rw" \
     -it --privileged $image bash
 
