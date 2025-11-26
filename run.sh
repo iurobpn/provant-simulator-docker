@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if git rev-parse --is-inside-work-tree &>/dev/null; then
     PRJ_DIR=$(git rev-parse --show-toplevel) #repository root is the project directory
 else
@@ -30,7 +31,6 @@ else
     shift
 fi
 
-
 opts="$*"
 if [ -z "$XAUTHORITY" ]; then
     xauth=""
@@ -38,23 +38,28 @@ else
     xauth='--env="XAUTHORITY=/home/ubuntu/.Xauthority"'
 fi
 
-# [ -e /dev/kfd ] && devs="--device=\"/dev/kfd\""
+name=prov
+if podman container exists $name; then
+    podman start -ia $name
+else
+    # [ -e /dev/kfd ] && devs="--device=\"/dev/kfd\""
     # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
-xhost +local:root
-podman run $gpus $xauth $opts \
-    --env="SDL_VIDEODRIVER=x11" \
-    --env="LIBGL_ALWAYS_INDIRECT=0" \
-    --env="DISPLAY=$DISPLAY" \
-    --env="QT_X11_NO_MITSHM=1" \
-    --env="NVIDIA_VISIBLE_DEVICES=all" \
-    --env="NVIDIA_DRIVER_CAPABILITIES=all" \
-    --device="/dev/dri" $devs \
-    --group-add video \
-    --volume="/dev/dri:/dev/dri:rw" \
-    --volume="/usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d" \
-    --volume="/usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d" \
-    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --volume="$HOME/.gazebo:/home/ubuntu/.gazebo" \
-    --volume="$PWD/shared/:/mnt/shared/:rw" \
-    -it --privileged $image bash
+    xhost +local:root
+    podman run --name $name gpus $xauth $opts \
+        --env="SDL_VIDEODRIVER=x11" \
+        --env="LIBGL_ALWAYS_INDIRECT=0" \
+        --env="DISPLAY=$DISPLAY" \
+        --env="QT_X11_NO_MITSHM=1" \
+        --env="NVIDIA_VISIBLE_DEVICES=all" \
+        --env="NVIDIA_DRIVER_CAPABILITIES=all" \
+        --device="/dev/dri" $devs \
+        --group-add video \
+        --volume="/dev/dri:/dev/dri:rw" \
+        --volume="/usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d" \
+        --volume="/usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d" \
+        --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+        --volume="$HOME/.gazebo:/home/ubuntu/.gazebo" \
+        --volume="$PWD/shared/:/mnt/shared/:rw" \
+        -it --privileged $image bash
+fi
 
