@@ -7,6 +7,7 @@ else
 fi
 
 echo "PRJ_DIR: $PRJ_DIR"
+PRJ=$(basename $PRJ_DIR)
 
 if [ "$1" = '-h' ]; then
     echo 'usage: $0 [-g] [image_name]'
@@ -31,11 +32,12 @@ else
     shift
 fi
 
+USER_HOME=/home/ubuntu
 opts="$*"
 if [ -z "$XAUTHORITY" ]; then
     xauth=""
 else
-    xauth='--env="XAUTHORITY=/home/ubuntu/.Xauthority"'
+    xauth="--env=\"XAUTHORITY=$USER_HOME/.Xauthority\""
 fi
 
 name=prov
@@ -44,8 +46,10 @@ if podman container exists $name; then
 else
     # [ -e /dev/kfd ] && devs="--device=\"/dev/kfd\""
     # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
+    # podman run --userns=keep-id --user "$(id -u):$(id -g)" \
     xhost +local:root
-    podman run --user "$(id -u):$(id -g)" --name $name $gpus $xauth $opts \
+    podman run \
+        --name $name $gpus $xauth $opts \
         --env="SDL_VIDEODRIVER=x11" \
         --env="LIBGL_ALWAYS_INDIRECT=0" \
         --env="DISPLAY=$DISPLAY" \
@@ -58,8 +62,9 @@ else
         --volume="/usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d" \
         --volume="/usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d" \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-        --volume="$HOME/.gazebo:/home/ubuntu/.gazebo" \
-        --volume="$PWD/shared/:/mnt/shared/:rw" \
+        --volume="$HOME/.gazebo:$USER_HOME/.gazebo:rw,U" \
+        --volume="$PWD/shared/:/mnt/shared/:rw,U" \
+        --volume="nvim-local-$USER-$PRJ:$USER_HOME/.local/share/nvim:rw" \
         -it --privileged $image bash
 fi
 
