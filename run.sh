@@ -64,7 +64,7 @@ else
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
         --volume="$HOME/.gazebo:$USER_HOME/.gazebo:rw,U" \
         --volume="$PWD/shared/:/mnt/shared/:rw,U" \
-        --volume="nvim-local-$USER-$PRJ:$USER_HOME/.local/share/nvim:rw" \
+        --volume="nvim-local-$USER-$PRJ:$USER_HOME/.local/share/nvim:rw,U" \
         -it --privileged $image bash
 fi
 
