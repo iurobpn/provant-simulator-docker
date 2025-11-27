@@ -45,7 +45,7 @@ else
     # [ -e /dev/kfd ] && devs="--device=\"/dev/kfd\""
     # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
     xhost +local:root
-    podman run --name $name gpus $xauth $opts \
+    podman run --user "$(id -u):$(id -g)" --name $name $gpus $xauth $opts \
         --env="SDL_VIDEODRIVER=x11" \
         --env="LIBGL_ALWAYS_INDIRECT=0" \
         --env="DISPLAY=$DISPLAY" \
