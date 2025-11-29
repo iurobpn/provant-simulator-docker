@@ -58,16 +58,17 @@ RUN /tmp/install-cmake.sh \
     && /tmp/install-boost.sh \
     && sudo rm -f /tmp/install-*.sh
 
-RUN useradd -m ubuntu \
-    && echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-ubuntu
-USER ubuntu
-RUN mkdir -p /home/ubuntu/catkin_ws/src/ \
-    && echo "source /opt/ros/noetic/setup.bash" >> /home/ubuntu/.bashrc \
-    && echo '[ -f "/home/ubuntu/catkin_ws/devel/setup.bash" ] && source /home/ubuntu/catkin_ws/devel/setup.bash' >> /home/ubuntu/.bashrc \
+ARG USER=ubuntu
+RUN useradd -m ${USER} \
+    && echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-${USER}
+USER ${USER}
+RUN mkdir -p /home/${USER}/catkin_ws/src/ \
+    && echo "source /opt/ros/noetic/setup.bash" >> /home/${USER}/.bashrc \
+    && echo '[ -f "/home/${USER}/catkin_ws/devel/setup.bash" ] && source /home/${USER}/catkin_ws/devel/setup.bash' >> /home/${USER}/.bashrc \
     && sudo chmod 440 /etc/sudoers
 
 
-WORKDIR /home/ubuntu
+WORKDIR /home/${USER}
 RUN --mount=type=bind,source=./shared/catkin_ws,target=/mnt/shared/catkin_ws,rw \
     [ -d "/mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/" ] \
     && cd /mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/ \
@@ -75,15 +76,15 @@ RUN --mount=type=bind,source=./shared/catkin_ws,target=/mnt/shared/catkin_ws,rw 
     && sudo rm -f /usr/local/bin/provant_gui \
     && sudo cp /mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/source/build/GUI /usr/local/bin/provant_gui
 
-RUN ln -s /mnt/shared/.bash_history /home/ubuntu/.bash_history \
-    && ln -s /mnt/shared/.bash_config /home/ubuntu/.bash_config \
-    && ln -s /mnt/shared /home/ubuntu/shared \
-    && ln -s /mnt/shared/catkin_ws /home/ubuntu/catkin_ws \
-    && echo 'export BOOST_ROOT=/usr/local' >> /home/ubuntu/.bashrc \
-    && echo 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH'  >> /home/ubuntu/.bashrc \
-    && echo 'export CPLUS_INCLUDE_PATH=/usr/local/include:$CPLUS_INCLUDE_PATH'  >> /home/ubuntu/.bashrc
+RUN ln -s /mnt/shared/.bash_history /home/${USER}/.bash_history \
+    && ln -s /mnt/shared/.bash_config /home/${USER}/.bash_config \
+    && ln -s /mnt/shared /home/${USER}/shared \
+    && ln -s /mnt/shared/catkin_ws /home/${USER}/catkin_ws \
+    && echo 'export BOOST_ROOT=/usr/local' >> /home/${USER}/.bashrc \
+    && echo 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH'  >> /home/${USER}/.bashrc \
+    && echo 'export CPLUS_INCLUDE_PATH=/usr/local/include:$CPLUS_INCLUDE_PATH'  >> /home/${USER}/.bashrc
 
-COPY ./shared/.prov /home/ubuntu/
+COPY ./shared/.prov /home/${USER}/
 
 WORKDIR /mnt/shared
 
