@@ -11,8 +11,10 @@ if [ "$1" = '-h' ]; then
 fi
 if [ "$1" = '-u' ]; then
     shift
-    user_cmd="--build-arg USER=$1 --build-arg UID=$(id -u) --build-arg GID=$(id -g)"
+    user_cmd="--build-arg USER=$1"
     shift
+else
+    user_cmd="--build-arg USER=$USER --build-arg UID=$(id -u) --build-arg GID=$(id -g)"
 fi
 if [ -z "$1" ]; then
     image=provant
