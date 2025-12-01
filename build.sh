@@ -11,7 +11,7 @@ if [ "$1" = '-h' ]; then
 fi
 if [ "$1" = '-u' ]; then
     shift
-    user_cmd="--build-arg USER=$1"
+    user_cmd="--build-arg USER=$1 --build-arg UID=$(id -u) --build-arg GID=$(id -g)"
     shift
 fi
 if [ -z "$1" ]; then

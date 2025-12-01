@@ -1,5 +1,7 @@
 FROM osrf/ros:noetic-desktop-full
 
+ARG UID=1000
+
 RUN apt-get update \
     && apt-get dist-upgrade -y \
     && apt-get install --yes \
@@ -59,7 +61,7 @@ RUN /tmp/install-cmake.sh \
     && sudo rm -f /tmp/install-*.sh
 
 ARG USER=ubuntu
-RUN useradd -m ${USER} \
+RUN useradd -u ${UID} -m ${USER} \
     && echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-${USER}
 USER ${USER}
 RUN mkdir -p /home/${USER}/catkin_ws/src/ \

@@ -48,7 +48,7 @@ else
     # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
     # podman run --userns=keep-id --user "$(id -u):$(id -g)" \
     xhost +local:root
-    podman run \
+    podman run --user $(id -u):$(id -g) --userns=keep-id\
         --name $name $gpus $xauth $opts \
         --env="SDL_VIDEODRIVER=x11" \
         --env="LIBGL_ALWAYS_INDIRECT=0" \
@@ -62,9 +62,9 @@ else
         --volume="/usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d" \
         --volume="/usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d" \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-        --volume="$HOME/.gazebo:$USER_HOME/.gazebo:rw,U" \
-        --volume="$PWD/shared/:/mnt/shared/:rw,U" \
-        --volume="nvim-local-$USER-$PRJ:$USER_HOME/.local/share/nvim:rw,U" \
+        --volume="$HOME/.gazebo:$USER_HOME/.gazebo:rw" \
+        --volume="$PWD/shared/:/mnt/shared/:rw" \
+        --volume="nvim-local-$USER-$PRJ:$USER_HOME/.local/share/nvim:rw" \
         -it --privileged $image bash
 fi
 
