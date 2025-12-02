@@ -4,9 +4,10 @@ set -e
 if [ "$1" = '-h' ]; then
     echo 'usage: $0 [-u username] [image_name]'
     echo 'image_name: default is provant'
-    echo '-u username: add username to the image instead of the default user (ubuntu)'
+    echo '-u username: add username to the image instead of the default user (current host user)'
     echo ''
-    echo 'builds the docker image with image_name name'
+    echo 'builds the docker image with image_name name and use the current'
+    echo 'username and uid/gid to create a user inside the image'
     exit 0
 fi
 if [ "$1" = '-u' ]; then

@@ -32,7 +32,7 @@ else
     shift
 fi
 
-USER_HOME=/home/ubuntu
+USER_HOME=$HOME
 opts="$*"
 if [ -z "$XAUTHORITY" ]; then
     xauth=""
