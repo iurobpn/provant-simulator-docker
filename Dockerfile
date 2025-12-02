@@ -1,5 +1,8 @@
 FROM osrf/ros:noetic-desktop-full
-
+ARG USER=ubuntu
+ARG UID=1000
+ENV DEBIAN_FRONTEND=noninteractive
+ENV HOME=/home/${USER}
 RUN apt update && apt dist-upgrade -y \
         && apt install --yes gpg wget curl git vim tmux cmake build-essential \
         qtcreator qt5-default qtchooser libqt5serialport5-dev mesa-utils \
@@ -42,25 +45,25 @@ RUN pip install ninja
 COPY ./install-casadi.sh /tmp
 RUN /tmp/install-casadi.sh
 
-RUN useradd -m ubuntu
-RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-ubuntu
-USER ubuntu
-RUN mkdir -p /home/ubuntu/catkin_ws/src/ProVANT-Simulator_Developer
-RUN echo "source /opt/ros/noetic/setup.bash" >> /home/ubuntu/.bashrc
-RUN echo "source /home/ubuntu/catkin_ws/devel/setup.bash" >> /home/ubuntu/.bashrc
+RUN useradd -u ${UID} -m ${USER}
+RUN echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-${USER}
+USER ${USER}
+RUN mkdir -p /home/${USER}/catkin_ws/src/ProVANT-Simulator_Developer
+RUN echo "source /opt/ros/noetic/setup.bash" >> /home/${USER}/.bashrc
+RUN echo "source /home/${USER}/catkin_ws/devel/setup.bash" >> /home/${USER}/.bashrc
 RUN sudo chmod 440 /etc/sudoers
 
-RUN sudo ln -s /home/ubuntu/catkin_ws/src/ProVANT_Simulator/source/build/GUI /usr/local/bin/provant_gui
+RUN sudo ln -s /home/${USER}/catkin_ws/src/ProVANT_Simulator/source/build/GUI /usr/local/bin/provant_gui
 
 # ProVANT Simulator Environment Variables
-RUN echo 'export TILT_PROJECT=$HOME/catkin_ws/src/ProVANT_Simulator/' >> /home/ubuntu/.bashrc
-RUN echo 'export PROVANT_ROS=$HOME/catkin_ws/src/' >> /home/ubuntu/.bashrc
-RUN echo 'export DIR_ROS=$HOME/catkin_ws/' >> /home/ubuntu/.bashrc
-RUN echo 'export TILT_STRATEGIES=$HOME/catkin_ws/devel/lib/' >> /home/ubuntu/.bashrc
-RUN echo 'export TILT_MATLAB=$HOME/catkin_ws/src/ProVANT_Simulator/source/Structure/Matlab/' >> /home/ubuntu/.bashrc
-RUN echo 'export PROVANT_DATABASE=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/' >> /home/ubuntu/.bashrc
-RUN echo 'export GAZEBO_MODEL_PATH=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/models/' >> /home/ubuntu/.bashrc
-RUN echo 'export CONTROL_STRATEGIES_SOURCE=$HOME/catkin_ws/src/ProVANT_Simulator/source/Structure/control_strategies' >> /home/ubuntu/.bashrc
+RUN echo 'export TILT_PROJECT=$HOME/catkin_ws/src/ProVANT_Simulator/' >> /home/${USER}/.bashrc
+RUN echo 'export PROVANT_ROS=$HOME/catkin_ws/src/' >> /home/${USER}/.bashrc
+RUN echo 'export DIR_ROS=$HOME/catkin_ws/' >> /home/${USER}/.bashrc
+RUN echo 'export TILT_STRATEGIES=$HOME/catkin_ws/devel/lib/' >> /home/${USER}/.bashrc
+RUN echo 'export TILT_MATLAB=$HOME/catkin_ws/src/ProVANT_Simulator/source/Structure/Matlab/' >> /home/${USER}/.bashrc
+RUN echo 'export PROVANT_DATABASE=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/' >> /home/${USER}/.bashrc
+RUN echo 'export GAZEBO_MODEL_PATH=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/models/' >> /home/${USER}/.bashrc
+RUN echo 'export CONTROL_STRATEGIES_SOURCE=$HOME/catkin_ws/src/ProVANT_Simulator/source/Structure/control_strategies' >> /home/${USER}/.bashrc
 
-WORKDIR /home/ubuntu/catkin_ws
+WORKDIR /home/${USER}/catkin_ws
 

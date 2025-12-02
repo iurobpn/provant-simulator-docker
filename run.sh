@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if git rev-parse --is-inside-work-tree &>/dev/null; then
     PRJ_DIR=$(git rev-parse --show-toplevel) #repository root is the project directory
 else
@@ -6,6 +7,7 @@ else
 fi
 
 echo "PRJ_DIR: $PRJ_DIR"
+PRJ=$(basename $PRJ_DIR)
 
 if [ "$1" = '-h' ]; then
     echo 'usage: $0 [-g] [image_name]'
@@ -30,30 +32,38 @@ else
     shift
 fi
 
-
+USER_HOME=$HOME
 opts="$*"
+if [ -z "$XAUTHORITY" ]; then
+    xauth=""
+else
+    xauth="--env=\"XAUTHORITY=$USER_HOME/.Xauthority\""
+fi
 
-
-
+name=prov
+if docker container exists $name; then
+    docker start -ia $name
+else
+    # [ -e /dev/kfd ] && devs="--device=\"/dev/kfd\""
     # --env="XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
-xhost +local:root
-docker run $gpus $opts \
-    --env="SDL_VIDEODRIVER=x11" \
-    --env="LIBGL_ALWAYS_INDIRECT=0" \
-    -v /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d \
-    -v /usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d \
-    --env="XAUTHORITY=/home/ubuntu/.Xauthority" \
-    --env="DISPLAY=$DISPLAY" \
-    --env="QT_X11_NO_MITSHM=1" \
-    --env="NVIDIA_VISIBLE_DEVICES=all" \
-    --env="NVIDIA_DRIVER_CAPABILITIES=all" \
-    --device="/dev/dri" \
-    --volume="/dev/dri:/dev/dri:rw" \
-    --group-add 44 \
-    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --volume="$HOME/.gazebo:/home/ubuntu/.gazebo" \
-    --volume="$XAUTHORITY:/home/ubuntu/.Xauthority" \
-    --volume="$PWD/shared/catkin_ws:/home/ubuntu/catkin_ws" \
-    --volume="$PWD/shared:/mnt/shared" \
-    -it --privileged $image bash
+    xhost +local:root
+    docker run --user $(id -u):$(id -g) --userns=keep-id\
+        --name $name $gpus $xauth $opts \
+        --env="SDL_VIDEODRIVER=x11" \
+        --env="LIBGL_ALWAYS_INDIRECT=0" \
+        --env="DISPLAY=$DISPLAY" \
+        --env="QT_X11_NO_MITSHM=1" \
+        --env="NVIDIA_VISIBLE_DEVICES=all" \
+        --env="NVIDIA_DRIVER_CAPABILITIES=all" \
+        --device="/dev/dri" $devs \
+        --group-add video \
+        --volume="/dev/dri:/dev/dri:rw" \
+        --volume="/usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d" \
+        --volume="/usr/share/vulkan/implicit_layer.d:/usr/share/vulkan/implicit_layer.d" \
+        --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+        --volume="$HOME/.gazebo:$USER_HOME/.gazebo:rw" \
+        --volume="$PWD/shared/:/mnt/shared/:rw" \
+        --volume="nvim-local-$USER-$PRJ:$USER_HOME/.local/share/nvim:rw" \
+        -it --privileged $image bash
+fi
 
