@@ -1,5 +1,6 @@
 FROM osrf/ros:noetic-desktop-full
 
+ARG USER=ubuntu
 ARG UID=1000
 
 RUN apt-get update \
@@ -60,7 +61,6 @@ RUN /tmp/install-cmake.sh \
     && /tmp/install-boost.sh \
     && sudo rm -f /tmp/install-*.sh
 
-ARG USER=ubuntu
 RUN useradd -u ${UID} -m ${USER} \
     && echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-${USER}
 USER ${USER}
