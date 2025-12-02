@@ -47,8 +47,9 @@ RUN /tmp/install-casadi.sh
 
 RUN useradd -u ${UID} -m ${USER}
 RUN echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-${USER}
+RUN chown -R ${USER}:${USER} ${HOME}
 USER ${USER}
-RUN mkdir -p /home/${USER}/catkin_ws/src/ProVANT-Simulator_Developer
+
 RUN echo "source /opt/ros/noetic/setup.bash" >> /home/${USER}/.bashrc
 RUN echo "source /home/${USER}/catkin_ws/devel/setup.bash" >> /home/${USER}/.bashrc
 RUN sudo chmod 440 /etc/sudoers
