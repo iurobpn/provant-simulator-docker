@@ -14,3 +14,5 @@ cmake -G Ninja -DWITH_IPOPT=true ..
 ninja
 sudo ninja install
 sudo ldconfig
+
+sudo rm -rf /tmp/casadi
