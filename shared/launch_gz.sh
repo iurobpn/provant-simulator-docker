@@ -14,4 +14,4 @@ catkin_make
 source /opt/ros/noetic/setup.bash
 source devel/setup.bash
 
-roslaunch Database gazebo.launch world:=/mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/worlds/worlds/iuro/quad.world control_strategy:=/mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/models/quadcopter/config/config.xml
+roslaunch Database gazebo.launch world:=/mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/worlds/worlds/iuro/quad_10obs.world control_strategy:=/mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/models/quadcopter/config/config.xml

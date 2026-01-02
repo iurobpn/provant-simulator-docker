@@ -39,20 +39,6 @@ RUN apt-get update \
 
 RUN pip3 install --upgrade conan
 
-# ADD https://cmake.org/files/v3.23/cmake-3.23.5.tar.gz /tmp/
-# WORKDIR /tmp
-# RUN tar -xvf cmake-3.23.5.tar.gz \
-#     && cd cmake-3.23.5 \
-#     && ./bootstrap --system-curl \
-#     && make -j$(nproc) \
-#     && make install
-
-# RUN add-apt-repository ppa:ubuntu-toolchain-r/test \
-#     && apt-get update && apt-get install --yes gcc-13 g++-13 \
-#     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 110 \
-#     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 110 \
-#     && rm -rf /var/lib/apt/lists/*
-
 RUN pip install ninja
 COPY ./install-*.sh /tmp
 RUN /tmp/install-cmake.sh \
