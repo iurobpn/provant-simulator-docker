@@ -10,7 +10,7 @@ fi
 cd /tmp/casadi
 git fetch && git checkout 3.7.2
 mkdir -p build && cd build
-cmake -G Ninja -DWITH_IPOPT=true ..
+cmake -G Ninja -DWITH_IPOPT=true -DWITH_THREADS=true ..
 ninja
 sudo ninja install
 sudo ldconfig

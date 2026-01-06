@@ -1,0 +1,682 @@
+<model name="obstacle_block_0">
+  <pose>45 45 45 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>60 60 60</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>60 60 60</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_1">
+  <pose>57.520648936501864 52.66604269210556 45.30918096043882 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.329938156168065 3.771120450718218 3.4261185741666496</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.329938156168065 3.771120450718218 3.4261185741666496</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_2">
+  <pose>23.413336257695896 22.881885632293844 24.526594489369224 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.514460795047112 3.9032726100533077 3.5602308631757253</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.514460795047112 3.9032726100533077 3.5602308631757253</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_3">
+  <pose>24.312696583760207 51.60758677286815 22.088365248214483 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.025541927233096 3.8680842993501905 3.6212465521729635</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.025541927233096 3.8680842993501905 3.6212465521729635</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_4">
+  <pose>32.58374120385371 28.408374288274313 8.81954055881609 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.965982532214948 4.62153108997024 3.247276544416125</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.965982532214948 4.62153108997024 3.247276544416125</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_5">
+  <pose>49.65360776572779 43.64206085147592 2.411629290356717 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.6812564044634506 4.311243339864997 3.98801696577216</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.6812564044634506 4.311243339864997 3.98801696577216</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_6">
+  <pose>4.593764815626764 13.315241243750098 29.349232724737746 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.970825591653659 4.968342745336591 4.629203037330455</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.970825591653659 4.968342745336591 4.629203037330455</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_7">
+  <pose>11.555911755774874 24.643262381406153 50.50885180238286 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.866772713401217 3.0814681805766257 3.9872604016101256</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.866772713401217 3.0814681805766257 3.9872604016101256</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_8">
+  <pose>30.61852670166224 22.32962251997319 57.41835861065731 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.178439605514077 3.831741558791211 3.7112058327917152</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.178439605514077 3.831741558791211 3.7112058327917152</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_9">
+  <pose>52.81767507006627 50.630495415430495 54.87660942939704 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.443442547275136 4.999369494309139 4.373555764873974</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.443442547275136 4.999369494309139 4.373555764873974</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_10">
+  <pose>17.79553248100723 6.036028997601353 52.617346575693716 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.058737804378767 3.2561432197026803 4.990774986498631</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.058737804378767 3.2561432197026803 4.990774986498631</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_11">
+  <pose>53.39513777929267 1.8435448429274295 32.69307232268068 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.4188967987891985 3.25025070605472 4.9858545351431856</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.4188967987891985 3.25025070605472 4.9858545351431856</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_12">
+  <pose>37.52039417964178 45.71391879529182 6.6369730515832535 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.3396948899344157 4.556221533644596 3.2605142464459242</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.3396948899344157 4.556221533644596 3.2605142464459242</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_13">
+  <pose>24.895834729269296 43.065278550227696 22.002057071763158 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.0243131450039384 3.6935446660404216 3.006757323162091</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.0243131450039384 3.6935446660404216 3.006757323162091</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_14">
+  <pose>44.09820157365054 54.3820345550136 13.918131344390693 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.433877111094453 4.5526509553630605 4.871132965264206</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.433877111094453 4.5526509553630605 4.871132965264206</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_15">
+  <pose>6.964785826703538 9.56222983437123 45.87807051356915 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.465760539265244 3.9731642263321607 4.596697876119873</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.465760539265244 3.9731642263321607 4.596697876119873</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_16">
+  <pose>5.799535959525833 54.845537286027955 4.212227833459708 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.267348586464623 4.795706167366038 4.717648255133739</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.267348586464623 4.795706167366038 4.717648255133739</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_17">
+  <pose>18.501913032395915 9.224706981030312 55.167516865665434 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.004527083176114 3.057072658560273 4.726216436545114</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.004527083176114 3.057072658560273 4.726216436545114</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_18">
+  <pose>15.927324246990663 18.066823077070307 36.09535009306614 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.326559840682741 4.269174892304274 3.7937415433782764</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.326559840682741 4.269174892304274 3.7937415433782764</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_19">
+  <pose>30.370040804006972 17.905921572042526 3.6014234663059383 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.940138440146931 3.5467801526141174 4.939780219401756</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.940138440146931 3.5467801526141174 4.939780219401756</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_20">
+  <pose>29.05262987094566 38.00471089795016 12.530274336497987 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.1129411023170923 4.1968869634564445 3.6995040170633886</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.1129411023170923 4.1968869634564445 3.6995040170633886</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_21">
+  <pose>38.53200549907436 2.3740286052972692 33.686903953006635 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.201969489365442 3.938353728837936 4.090380617686618</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.201969489365442 3.938353728837936 4.090380617686618</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_22">
+  <pose>37.18598907071012 54.52864860066101 23.759019753975277 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.98869546025578 3.8908959250049993 4.117248790513207</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.98869546025578 3.8908959250049993 4.117248790513207</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_23">
+  <pose>12.689003159733973 36.213250230796596 28.190402057652733 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.056702141530161 4.633624073670908 4.241014761418904</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.056702141530161 4.633624073670908 4.241014761418904</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_24">
+  <pose>14.887926939169581 4.982262930584261 43.61516974423154 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.1159664276451275 4.3276796803706405 4.286218110747733</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.1159664276451275 4.3276796803706405 4.286218110747733</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_25">
+  <pose>12.118039390219824 16.13840569360776 35.017389117407234 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.7810351226736385 3.446119313806301 3.3174648967461504</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.7810351226736385 3.446119313806301 3.3174648967461504</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_26">
+  <pose>32.443979874326395 39.44150525825752 38.28717748332925 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.630948508857913 3.693773898273192 3.45720707949021</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.630948508857913 3.693773898273192 3.45720707949021</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_27">
+  <pose>6.961671093734772 44.98919759100507 8.093249068995686 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>4.898231555203032 3.843574574643598 4.12708336722984</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>4.898231555203032 3.843574574643598 4.12708336722984</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_28">
+  <pose>33.63709390919597 11.51545977925293 34.614241957091004 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.3143191619508015 3.0481049607129966 3.6614531215914763</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.3143191619508015 3.0481049607129966 3.6614531215914763</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_29">
+  <pose>48.01385119312369 39.840128922785034 23.960393399264543 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.2244920725687454 3.017297109723512 3.490697346050632</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.2244920725687454 3.017297109723512 3.490697346050632</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
+<model name="obstacle_block_30">
+  <pose>10.170607796281177 55.745873497167594 46.02868447309913 0 0 0</pose>
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>3.383216867184127 3.956536942147482 3.90421055010771</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>3.383216867184127 3.956536942147482 3.90421055010771</size></box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Green</name>
+        </script>
+      </material>
+    </visual>
+  </link>
+</model>
