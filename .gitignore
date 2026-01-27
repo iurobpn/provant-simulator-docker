@@ -5,3 +5,6 @@ sessions/
 shared/catkin_ws
 shared/nvim
 shared/sim_quad
+shared/sim
+shared/provant-simulator-adds
+shared/json
