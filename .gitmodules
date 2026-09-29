@@ -1,0 +1,3 @@
+[submodule "shared/ros2_ws/src/ProVANT_Simulator_Developer"]
+	path = shared/ros2_ws/src/ProVANT_Simulator_Developer
+	url = git@github.com:ProVANT-Project/ProVANT_Simulator_Developer.git
