@@ -33,6 +33,8 @@ RUN apt-get update \
     libopenblas-dev \
     file \
     ros-jazzy-ament-cmake-clang-format \
+    ros-jazzy-joint-state-publisher \
+    ros-jazzy-joint-state-publisher-gui \
     && rm -rf /var/lib/apt/lists/*
 
 

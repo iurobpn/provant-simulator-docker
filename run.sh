@@ -8,7 +8,7 @@ fi
 PRJ=$(basename $PRJ_DIR)
 
 echo "PRJ_DIR: $PRJ_DIR"
-image="prov"
+image="provant"
 # gpus="--device /dev/dri"
 net="--net=host --uts=host"
 for arg in "$@"; do
@@ -53,7 +53,7 @@ USER_HOME=$HOME
 echo "PWD: $PWD"
 # docker run --user $(id -u):$(id -g) --userns=keep-id\
 
-name=frota
+name=prov
 HAS_NAME=$(docker ps --filter "status=exited" --format '{{.Names}}' | grep -x  $name | wc -l)
 if [[ "$HAS_NAME" == "1" ]]; then
     echo "docker start ... $HAS_NAME"
@@ -72,11 +72,11 @@ else
         --device /dev/dri \
         --security-opt label=disable \
         --group-add video \
-        --group-add render \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
         --volume="$HOME/.gazebo:$USER_HOME/.gazebo:rw" \
         --volume="$PWD/shared/:/mnt/shared/:rw" \
         --privileged \
-        -it $image zsh
+        -it $image bash
+        # --group-add render \
 fi
 
