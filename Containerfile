@@ -32,45 +32,50 @@ RUN apt-get update \
     libmetis-dev \
     libopenblas-dev \
     file \
+    ros-jazzy-ament-cmake-clang-format \
     && rm -rf /var/lib/apt/lists/*
 
 
-# RUN pip3 install --upgrade conan
-#
-# RUN pip install ninja
-# COPY ./install-*.sh /tmp
-# RUN /tmp/install-cmake.sh \
-#     && /tmp/install-gcc.sh \
-#     && /tmp/install-casadi.sh \
-#     && /tmp/install-boost.sh \
-#     && sudo rm -f /tmp/install-*.sh
-#
-# RUN useradd -u ${UID} -m ${USER} \
-#     && echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-${USER}
-# USER ${USER}
-# RUN mkdir -p /home/${USER}/catkin_ws/src/ \
-#     && echo "source /opt/ros/noetic/setup.bash" >> /home/${USER}/.bashrc \
-#     && echo '[ -f "/home/${USER}/catkin_ws/devel/setup.bash" ] && source /home/${USER}/catkin_ws/devel/setup.bash' >> /home/${USER}/.bashrc \
-#     && sudo chmod 440 /etc/sudoers
-#
-#
-# WORKDIR /home/${USER}
+RUN pip3 install --break-system-packages --upgrade conan
+
+RUN pip install --break-system-packages ninja
+COPY ./install-*.sh /tmp
+RUN /tmp/install-cmake.sh \
+    && /tmp/install-gcc.sh \
+    && /tmp/install-casadi.sh \
+    && /tmp/install-boost.sh \
+    && sudo rm -f /tmp/install-*.sh
+
+
+# add current user, delete standard ubuntu user
+RUN bash -c "[[ \"${USER}\" != \"ubuntu\" ]] && userdel ubuntu || true" \
+    && bash -c "! id ${USER} > /dev/null 2> /dev/null && useradd -u ${UID} -m ${USER} && echo \"${USER} ALL=(ALL) NOPASSWD:ALL\" | sudo tee /etc/sudoers.d/90-${USER}" \
+    && usermod -a -G video || true \
+    && usermod -a -G render || true
+
+USER ${USER}
+RUN echo "source /opt/ros/jazzy/setup.bash" >> /home/${USER}/.bashrc \
+    && echo '[ -f "/home/${USER}/ros2_ws/install/setup.bash" ] && source /home/${USER}/ros2_ws/install/setup.bash' >> /home/${USER}/.bashrc \
+    && sudo chmod 440 /etc/sudoers
+
+
+WORKDIR /home/${USER}
 # RUN --mount=type=bind,source=./shared/catkin_ws,target=/mnt/shared/catkin_ws,rw \
 #     [ -d "/mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/" ] \
 #     && cd /mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/ \
 #     && sudo bash -c 'source /opt/ros/noetic/setup.bash && ./install.sh' \
 #     && sudo rm -f /usr/local/bin/provant_gui \
 #     && sudo cp /mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/source/build/GUI /usr/local/bin/provant_gui
-#
-# RUN ln -s /mnt/shared/.bash_history /home/${USER}/.bash_history \
-#     && ln -s /mnt/shared/.bash_config /home/${USER}/.bash_config \
-#     && ln -s /mnt/shared /home/${USER}/shared \
-#     && ln -s /mnt/shared/catkin_ws /home/${USER}/catkin_ws \
-#     && echo 'export BOOST_ROOT=/usr/local' >> /home/${USER}/.bashrc \
-#     && echo 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH'  >> /home/${USER}/.bashrc \
-#     && echo 'export CPLUS_INCLUDE_PATH=/usr/local/include:$CPLUS_INCLUDE_PATH'  >> /home/${USER}/.bashrc
-#
-# COPY ./shared/.prov /home/${USER}/
-#
-# WORKDIR /mnt/shared
-#
+
+RUN ln -s /mnt/shared/.bash_history /home/${USER}/.bash_history \
+    && ln -s /mnt/shared/.bash_config /home/${USER}/.bash_config \
+    && ln -s /mnt/shared /home/${USER}/shared \
+    && ln -s /mnt/shared/catkin_ws /home/${USER}/catkin_ws \
+    && echo 'export BOOST_ROOT=/usr/local' >> /home/${USER}/.bashrc \
+    && echo 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH'  >> /home/${USER}/.bashrc \
+    && echo 'export CPLUS_INCLUDE_PATH=/usr/local/include:$CPLUS_INCLUDE_PATH'  >> /home/${USER}/.bashrc
+
+COPY ./shared/.prov /home/${USER}/
+
+WORKDIR /mnt/shared/ros2_ws/
+

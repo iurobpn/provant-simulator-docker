@@ -23,4 +23,5 @@ else
     image=$1
 fi
 
+echo "image: $image user cmd: $user_cmd"
 docker build -t $image $user_cmd -f Containerfile .
