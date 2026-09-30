@@ -56,16 +56,13 @@ RUN bash -c "[[ \"${USER}\" != \"ubuntu\" ]] && userdel ubuntu || true" \
     && usermod -a -G render || true
 
 USER ${USER}
-RUN echo "source /opt/ros/jazzy/setup.bash" >> /home/${USER}/.bashrc \
-    && echo '[ -f "/home/${USER}/ros2_ws/install/setup.bash" ] && source /home/${USER}/ros2_ws/install/setup.bash' >> /home/${USER}/.bashrc \
-    && sudo chmod 440 /etc/sudoers
+RUN sudo chmod 440 /etc/sudoers
 
 
 WORKDIR /home/${USER}
 # RUN --mount=type=bind,source=./shared/catkin_ws,target=/mnt/shared/catkin_ws,rw \
 #     [ -d "/mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/" ] \
 #     && cd /mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/ \
-#     && sudo bash -c 'source /opt/ros/noetic/setup.bash && ./install.sh' \
 #     && sudo rm -f /usr/local/bin/provant_gui \
 #     && sudo cp /mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/source/build/GUI /usr/local/bin/provant_gui
 
