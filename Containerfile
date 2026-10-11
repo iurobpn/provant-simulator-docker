@@ -12,8 +12,6 @@ RUN apt-get update \
     git \
     cmake \
     build-essential \
-    qtcreator \
-    libqt5serialport5-dev \
     mesa-utils \
     python3-pip \
     xterm \
@@ -37,17 +35,13 @@ RUN apt-get update \
     ros-jazzy-joint-state-publisher-gui \
     && rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install --break-system-packages --upgrade conan ninja cmake
 
-RUN pip3 install --break-system-packages --upgrade conan
-
-RUN pip install --break-system-packages ninja
 COPY ./install-*.sh /tmp
-RUN /tmp/install-cmake.sh \
-    && /tmp/install-gcc.sh \
+RUN /tmp/install-gcc.sh \
     && /tmp/install-casadi.sh \
     && /tmp/install-boost.sh \
     && sudo rm -f /tmp/install-*.sh
-
 
 # add current user, delete standard ubuntu user
 RUN bash -c "[[ \"${USER}\" != \"ubuntu\" ]] && userdel ubuntu || true" \
@@ -58,8 +52,7 @@ RUN bash -c "[[ \"${USER}\" != \"ubuntu\" ]] && userdel ubuntu || true" \
 USER ${USER}
 RUN sudo chmod 440 /etc/sudoers
 
-
-WORKDIR /home/${USER}
+# WORKDIR /home/${USER}
 # RUN --mount=type=bind,source=./shared/catkin_ws,target=/mnt/shared/catkin_ws,rw \
 #     [ -d "/mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/" ] \
 #     && cd /mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/ \
@@ -67,14 +60,9 @@ WORKDIR /home/${USER}
 #     && sudo cp /mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/source/build/GUI /usr/local/bin/provant_gui
 
 RUN ln -s /mnt/shared/.bash_history /home/${USER}/.bash_history \
-    && ln -s /mnt/shared/.bash_config /home/${USER}/.bash_config \
-    && ln -s /mnt/shared /home/${USER}/shared \
-    && ln -s /mnt/shared/catkin_ws /home/${USER}/catkin_ws \
-    && echo 'export BOOST_ROOT=/usr/local' >> /home/${USER}/.bashrc \
-    && echo 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH'  >> /home/${USER}/.bashrc \
-    && echo 'export CPLUS_INCLUDE_PATH=/usr/local/include:$CPLUS_INCLUDE_PATH'  >> /home/${USER}/.bashrc
+    && ln -s /mnt/shared/.zsh_history /home/${USER}/.zsh_history
 
 COPY ./shared/.prov /home/${USER}/
-
+ENTRYPOINT []
 WORKDIR /mnt/shared/ros2_ws/
 
