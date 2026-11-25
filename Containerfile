@@ -33,6 +33,27 @@ RUN apt-get update \
     ros-jazzy-ament-cmake-clang-format \
     ros-jazzy-joint-state-publisher \
     ros-jazzy-joint-state-publisher-gui \
+    python3-opencv \
+    python3-dev \
+    libeigen3-dev \
+    python3-aiohttp \
+    python3-numpy \
+    python3-pip \
+    python3-av \
+    python3-fastapi \
+    python3-pytest \
+    python3-scipy \
+    libcurl4-openssl-dev \
+    python3-uvicorn \
+    python3-pyproj \
+    python3-pydantic \
+    zlib1g-dev \
+    python3-aiohttp-cors \
+    python3-flask-socketio \
+    python3-yaml \
+    python3-requests \
+    libarmadillo-dev \
+    python3-aiortc \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --break-system-packages --upgrade conan ninja cmake
@@ -63,6 +84,9 @@ RUN ln -s /mnt/shared/.bash_history /home/${USER}/.bash_history \
     && ln -s /mnt/shared/.zsh_history /home/${USER}/.zsh_history
 
 COPY ./shared/.prov /home/${USER}/
+
+RUN bash -c "source /opt/ros/jazzy/setup.bash && rosdep update"
+
 ENTRYPOINT []
 WORKDIR /mnt/shared/ros2_ws/
 
