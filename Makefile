@@ -5,5 +5,5 @@ img?=provant
 all: provant
 
 provant:
-	docker build -t $(img) .
+	./build.sh $(img)
 

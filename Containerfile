@@ -30,6 +30,8 @@ RUN apt-get update \
     libmetis-dev \
     libopenblas-dev \
     file \
+    bash-completion \
+    lf \
     ros-jazzy-ament-cmake-clang-format \
     ros-jazzy-joint-state-publisher \
     ros-jazzy-joint-state-publisher-gui \
@@ -79,6 +81,7 @@ RUN sudo chmod 440 /etc/sudoers
 #     && cd /mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/ \
 #     && sudo rm -f /usr/local/bin/provant_gui \
 #     && sudo cp /mnt/shared/catkin_ws/src/ProVANT-Simulator_Developer/source/build/GUI /usr/local/bin/provant_gui
+RUN bash -c "source /opt/ros/jazzy/setup.bash && rosdep update"
 
 RUN ln -s /mnt/shared/.bash_history /home/${USER}/.bash_history \
     && ln -s /mnt/shared/.zsh_history /home/${USER}/.zsh_history
